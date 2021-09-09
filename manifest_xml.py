@@ -154,7 +154,8 @@ class _XmlRemote(object):
     # and then replacing it with the original when we are done.
 
     if manifestUrl.find(':') != manifestUrl.find('/') - 1:
-      url = urllib.parse.urljoin('gopher://' + manifestUrl, url)
+      if manifestUrl.find("http") > 0:
+        url = urllib.parse.urljoin('gopher://' + manifestUrl, url)
       url = re.sub(r'^gopher://', '', url)
     else:
       url = urllib.parse.urljoin(manifestUrl, url)
